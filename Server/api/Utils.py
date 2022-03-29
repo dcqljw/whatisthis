@@ -1,10 +1,13 @@
 import hashlib
+import time
 
 
-def create_one_url(date):
-    sign = hashlib.md5(bytes(date.encode("utf-8"))).hexdigest()
+def create_one_url(txt):
+    text = f"{txt}'xby159357'{int(time.time())}"
+    sign = hashlib.md5(bytes(text.encode("utf-8"))).hexdigest()
     return sign
 
 
 if __name__ == '__main__':
-    print(create_one_url("1241qq4124"))
+    # print(int(time.time()))
+    print(create_one_url("发生什么事了"))
