@@ -1,5 +1,5 @@
 from django.core.cache import cache
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 
 from api.Utils import create_one_url
 
@@ -29,3 +29,14 @@ def create_article(request):
     cache.set(sign, text)
     context = {sign: text}
     return JsonResponse(context)
+
+
+def short_link(request):
+    # href = request.GET.get('href')
+    cache.set("1", "https://www.baidu.com")
+    return JsonResponse({"code": "1000"})
+
+
+def test(request, short):
+    href = cache.get(short)
+    return HttpResponseRedirect(href)
