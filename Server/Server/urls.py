@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from api import urls
-from api import views
+from api import views as app_api_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(urls)),
-    path('d/<short>', views.test)
+    path('d/<short>', app_api_view.test),
+    path('xby', app_api_view.one_url)
 ]
