@@ -21,6 +21,6 @@ from api import views as app_api_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(urls)),
-    path('d/<short>', app_api_view.test),
+    path('d/<short>', app_api_view.short_redirect),
     path('xby', app_api_view.one_url)
 ]
