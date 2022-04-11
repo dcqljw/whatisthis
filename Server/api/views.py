@@ -2,11 +2,15 @@ import re
 
 from django.core.cache import cache
 from django.http import JsonResponse, HttpResponseRedirect
+from django.conf import settings
 from rest_framework.decorators import api_view
 
 from api.Utils import create_one_url
 
+host_domain_name = settings.HOST_DOMAIN_NAME
 
+
+@api_view(["GET"])
 def one_url(request):
     """
     一次性url
@@ -22,6 +26,7 @@ def one_url(request):
         return JsonResponse({})
 
 
+@api_view(["POST"])
 def create_article(request):
     """
     创建文章
@@ -36,14 +41,14 @@ def create_article(request):
         # context = {sign: text}
         context = {
             "code": "1000",
-            "href": f"http://127.0.0.1:8000/xby?xby={sign}"
+            "href": f"http://{host_domain_name}/xby?xby={sign}"
         }
         return JsonResponse(context)
     else:
         return JsonResponse({"msg": "error"})
 
 
-@api_view(["POST"])
+@api_view(["POST", "GET"])
 def short_link(request):
     """
     转换为短链接
@@ -56,11 +61,11 @@ def short_link(request):
     if pattern.search(href):
         if href[:4] == "http":
             cache.set(key, href)
-            context = {"url": f"http://127.0.0.1:8000/d/{key}"}
+            context = {"url": f"http://{host_domain_name}/d/{key}"}
         else:
             href = f"http://{href}"
             cache.set(key, href)
-            context = {"url": f"http://127.0.0.1:8000/d/{key}"}
+            context = {"url": f"http://{host_domain_name}/d/{key}"}
         return JsonResponse(context)
     else:
         return JsonResponse({})
