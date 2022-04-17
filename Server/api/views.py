@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from api.Utils import create_one_url
 
 host_domain_name = settings.HOST_DOMAIN_NAME
+client_name = settings.CLIENT_NAME
 
 
 @api_view(["GET"])
@@ -33,15 +34,18 @@ def create_article(request):
     :param request:
     :return: 文章链接
     """
-    text = request.POST.get("text")
-    date = request.POST.get("date")
+    text = request.data.get("text")
+    date = request.data.get("date")
     if (text and date) is not None:
         sign = create_one_url(date)
-        cache.set(sign, text)
+        try:
+            cache.set(sign, text)
+        except Exception:
+            return JsonResponse({"msg": "error"})
         # context = {sign: text}
         context = {
             "code": "1000",
-            "href": f"http://{host_domain_name}/xby?xby={sign}"
+            "href": f"http://{client_name}/xby?xby={sign}"
         }
         return JsonResponse(context)
     else:

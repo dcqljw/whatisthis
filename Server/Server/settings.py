@@ -24,9 +24,13 @@ SECRET_KEY = 'django-insecure-fnx2t6*^9zn=rvt4m#l6g0=-^rfhbwv7$t7v54=&8hdcr9cjws
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# HOST_DOMAIN_NAME = "150.158.94.229"
+# HOST_DOMAIN_NAME = "http://dlxz.xyz"
 HOST_DOMAIN_NAME = "127.0.0.1:8000"
 HOST_IP = "150.158.94.229"
+
+CLIENT_NAME = "127.0.0.1:8080"
+# CLIENT_NAME = "http://dlxz.xyz"
+
 
 ALLOWED_HOSTS = ["*"]
 
@@ -39,17 +43,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = '*'
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'Server.urls'
 
