@@ -6,9 +6,8 @@ import './plugins/element.js'
 import axios from "axios";
 
 let api = require("../public/ServerApiConfig.json")
-
+console.log(api)
 axios.defaults.baseURL = api.API_DOMAIN
-// Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 new Vue({
