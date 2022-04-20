@@ -5,9 +5,9 @@ import router from './router'
 import './plugins/element.js'
 import axios from "axios";
 
-let api = require("../public/ServerApiConfig.json")
+let api = window.server.SERVER_API
 console.log(api)
-axios.defaults.baseURL = api.API_DOMAIN
+axios.defaults.baseURL = api
 Vue.config.productionTip = false
 
 new Vue({
