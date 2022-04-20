@@ -5,7 +5,9 @@ import router from './router'
 import './plugins/element.js'
 import axios from "axios";
 
-axios.defaults.baseURL = "http://127.0.0.1:8000"
+let api = require("../public/ServerApiConfig.json")
+
+axios.defaults.baseURL = api.API_DOMAIN
 // Vue.prototype.$http = axios
 Vue.config.productionTip = false
 

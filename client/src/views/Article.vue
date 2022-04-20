@@ -20,8 +20,9 @@ export default {
     axios({
       url: "xby?xby=" + sign,
       method: "GET"
-    }).then((result) =>{
+    }).then((result) => {
       console.log(result)
+      this.text = result.data.msg
     })
   }
 }

@@ -37,12 +37,11 @@ def create_article(request):
     text = request.data.get("text")
     date = request.data.get("date")
     if (text and date) is not None:
-        sign = create_one_url(date)
+        sign = create_one_url(str(date) + str(text))
         try:
             cache.set(sign, text)
         except Exception:
             return JsonResponse({"msg": "error"})
-        # context = {sign: text}
         context = {
             "code": "1000",
             "href": f"http://{client_name}/xby?xby={sign}"
