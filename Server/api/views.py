@@ -44,7 +44,7 @@ def create_article(request):
             return JsonResponse({"msg": "error"})
         context = {
             "code": "1000",
-            "href": f"http://{client_name}/xby?xby={sign}"
+            "href": f"https://{client_name}/xby?xby={sign}"
         }
         return JsonResponse(context)
     else:
